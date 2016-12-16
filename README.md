@@ -4,13 +4,13 @@ In first place, you have to build the image :
 
 ```bash
 git clone https://github.com/octree-gva/Docker_apache-php7.git && cd Docker_apache-php7
-docker build -t octree/apache-php7 .
+docker build -t octree/apache .
 ```
 
 Then, you can run it and mapping your files :
 
 ```bash
-docker run -d -p 8080:80 --name my_app -v $PWD/dist:/var/www/html octree/apache-php7
+docker run -d -p 8080:80 --name my_app -v $PWD/dist:/var/www/html octree/apache
 ```
 
 - `-d` : Run the container in background. You can see logs with `docker logs -f my_app`.
@@ -39,11 +39,7 @@ The database will be accessible in your app container with the hostname `mysql`.
 
 ## Add php extentions
 
-The image comes with some default php extensions. If you want to add more extensions, you can add them to this line in the Dockerfile :
-
-```dockerfile
-RUN apt-get update && apt-get install -y apache2 php php-curl php-tidy php-gd
-```
+The image comes with some default php extensions. If you want to add more extensions, you can add them to the Dockerfile.
 
 Then, re-build the image.
 
@@ -53,6 +49,7 @@ In this repository, you can find two configuration files used by the image.
 
 - `apache2.conf`: Global configuration of Apache
 - `default-site.conf`: configuration for the default enabled site in Apache.
+- `default-php.ini`: configuration for php
 
 You can modify them as you wish and re-build the image.
 
