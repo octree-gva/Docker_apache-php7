@@ -3,9 +3,9 @@ MAINTAINER Octree <sysadmin@octree.ch>
 
 # Installation des paquets
 ENV DEBIAN_FRONTEND=noninteractive
-RUN apt-get -qq update && apt-get -qqy install sudo wget lynx telnet \
-	nano curl make git-core locales bzip2 apache2 php5-cli libapache2-mod-php5 \
-	php5-mysqlnd php5-mcrypt php5-tidy php5-curl php5-gd vim \
+RUN apt-get -qq update && apt-get -qqy install sudo wget \
+	curl make git-core locales bzip2 apache2 php5-cli libapache2-mod-php5 \
+	php5-mysqlnd php5-mcrypt php5-tidy php5-curl php5-gd php5-xsl php5-intl \
 	&& apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Importation de la configuration de Apache
