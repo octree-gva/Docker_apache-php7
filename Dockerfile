@@ -3,7 +3,7 @@ MAINTAINER Octree <sysadmin@octree.ch>
 
 # Installation des paquets
 ENV DEBIAN_FRONTEND=noninteractive
-RUN apt-get -qq update && apt-get -qqy install sudo wget \
+RUN apt-get -qq update && apt-get -qqy install sudo wget sendmail \
 	curl make git-core locales bzip2 apache2 php5-cli libapache2-mod-php5 \
 	php5-mysqlnd php5-mcrypt php5-tidy php5-curl php5-gd php5-xsl php5-intl \
 	&& apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
@@ -16,6 +16,10 @@ COPY default-php.ini /etc/php5/apache2/php.ini
 # Configuration de Apache
 RUN a2enmod rewrite
 RUN a2enmod headers
+
+# Installation de composer
+COPY composer-installer.sh .
+RUN ./composer-installer.sh && mv composer.phar /usr/bin/composer
 
 # Création du dossier source
 RUN rm -rf /var/www/html/*
